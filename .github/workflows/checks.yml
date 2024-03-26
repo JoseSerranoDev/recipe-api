@@ -15,8 +15,8 @@ jobs:
         # uses another pre-made action provided for github actions
         uses: docker/login-action@v1
         with:
-          username: ${{ secret.DOCKERHUB_USER }}
-          password: ${{ secret.DOCKERHUB_TOKEN }}
+          username: ${{ secrets.DOCKERHUB_USER }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Checkout
         # Checkout our code to run tests and lint
         uses: actions/checkout@v2
