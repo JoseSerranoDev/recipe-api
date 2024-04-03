@@ -22,6 +22,11 @@ ARG DEV=false
 RUN python -m venv /py && \
     # Specify full path of venv and update pip
     /py/bin/pip install --upgrade pip && \
+    # Install postgresql-client package so pysopg2 could install correctly
+    apk add --update --no-cache postgresql-client && \
+    # Install virtual packages (tmp-build-deps) that only were use in the pyscopg2 instalation
+    apk add --update --no-cache --virtual .tmp-build-deps \
+        build-base postgresql-dev musl-dev && \
     # Install the requirements to our docker image
     /py/bin/pip install -r /tmp/requirements.txt && \
     # if DEV equals true install requirements.dev.txt
@@ -30,6 +35,8 @@ RUN python -m venv /py && \
     fi && \
     # remove the tmp directory
     rm -rf /tmp && \
+    # remove the tmp-build-deps
+    apk del .tmp-build-deps && \
     # calls the add user command to which adds a new user inside our image
     adduser \
         --disabled-password \
