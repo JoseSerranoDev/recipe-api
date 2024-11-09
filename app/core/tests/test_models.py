@@ -82,7 +82,7 @@ class ModelTests(TestCase):
 
         self.assertEqual(str(recipe), recipe.title)
 
-    def teste_create_tag(self):
+    def test_create_tag(self):
         """ Test creating a tag is succesful. """
 
         user = create_user()
@@ -98,5 +98,5 @@ class ModelTests(TestCase):
             user=user,
             name='Onion'
         )
-        
+
         self.assertEqual(str(ingredient), ingredient.name)
