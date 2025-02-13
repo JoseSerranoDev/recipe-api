@@ -14,6 +14,7 @@ services:
       - "8000:8000"
     volumes:
       - ./app:/app
+      - dev-static-data:/vol/web
     # Command that uses the service to run
     command: >
       sh -c "python manage.py wait_for_db &&
@@ -26,6 +27,7 @@ services:
       - DB_NAME=devdb
       - DB_USER=devuser
       - DB_PASS=changeme
+      - DEBUG=1
     # wait the db service to start before it starts the app service
     depends_on:
       - db
@@ -45,3 +47,4 @@ services:
 
 volumes:
   dev-db-data:
+  dev-static-data:
